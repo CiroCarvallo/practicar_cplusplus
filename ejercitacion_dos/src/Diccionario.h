@@ -1,0 +1,33 @@
+#ifndef __DICCIONARIO_H__
+#define __DICCIONARIO_H__
+
+#include <vector>
+
+typedef int Clave;
+typedef int Valor;
+
+int cantidad(Clave v, std::vector<Clave> v1);
+bool esPermutacion(std::vector<Clave> v1,std::vector <Clave> v2);
+
+class Diccionario {
+public:
+	Diccionario();
+	void definir(Clave k, Valor v);
+	bool def(Clave k) const;
+	Valor obtener(Clave k) const;
+	void borrar(Clave k);
+	std::vector<Clave> claves() const;
+	bool operator==(Diccionario o) const;
+	Diccionario operator|| (Diccionario o) const;
+	Diccionario operator&& (Diccionario o) const;
+	
+private:
+	struct Asociacion{
+		Clave clave;
+		Valor valor;
+	};
+	std::vector <Asociacion> _diccionario;
+	
+};
+
+#endif /*__DICCIONARIO_H__*/
