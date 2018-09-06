@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/miriam/Escritorio/algo2/ejercicio1/ejercitacion_clases/alumnos/src/Horario.cpp
+
+/home/miriam/Escritorio/algo2/ejercicio1/ejercitacion_clases/alumnos/tests/test_horario_main.cpp
+../src/Horario.cpp
+/home/miriam/Escritorio/algo2/ejercicio1/ejercitacion_clases/alumnos/src/Horario.cpp
+iostream
+-
+
