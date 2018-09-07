@@ -88,7 +88,6 @@ std::vector<Clave> Diccionario<Clave,Valor>::claves() const{
 	// busco la 
 	while( !v1.empty() ){
 			int pos=pos_minimo(v1);
-			std::cout<<pos_minimo(v1);
 			v2.push_back(v1[pos]);
 			v1.erase(v1.begin()+pos);
 	}
