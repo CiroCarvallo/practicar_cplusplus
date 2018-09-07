@@ -3,6 +3,20 @@
 
 #include <vector>
 #include <cassert>
+#include <iostream>
+
+template <class Clave> // devuelve la posicion del minimode un vector != vacio
+int pos_minimo (std::vector<Clave> v1){
+	int min; min=v1[0];
+	int pos_min; pos_min=0;
+	for (unsigned int i=1; i<v1.size();i++){
+		if (v1[i]<min){
+			min=v1[i];
+			pos_min=i;
+		}
+	}
+	return pos_min;
+}
 
 template <class Clave, class Valor>
 class Diccionario {
@@ -11,6 +25,7 @@ public:
 	void definir(Clave k, Valor v);
 	bool def(Clave k) const;
 	Valor obtener(Clave k) const;
+	std::vector <Clave> claves() const;
 private:
 
 	struct Asociacion {
@@ -59,6 +74,25 @@ Valor Diccionario <Clave,Valor>::obtener(Clave k) const {
 		}
 	}
 	assert(false);
+}
+
+// usa seleccion sort
+template <class Clave, class Valor>
+std::vector<Clave> Diccionario<Clave,Valor>::claves() const{
+	int size=_asociaciones.size();
+	std::vector<Clave> v1(size);
+	std::vector<Clave> v2;
+	for (unsigned int i=0; i<size;i++){
+		v1[i]=_asociaciones[i].clave;
+	}
+	// busco la 
+	while( !v1.empty() ){
+			int pos=pos_minimo(v1);
+			std::cout<<pos_minimo(v1);
+			v2.push_back(v1[pos]);
+			v1.erase(v1.begin()+pos);
+	}
+	return v2;
 }
 
 #endif
