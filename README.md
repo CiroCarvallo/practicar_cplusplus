@@ -1,6 +1,7 @@
 # practicar_cplusplus
 
-##ejercicios para practicar c++`
+##ejercicios para practicar c++
+
 -`classes`
 -`proprocesamiento`
 -`templates`
