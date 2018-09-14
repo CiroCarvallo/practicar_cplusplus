@@ -153,22 +153,17 @@ bool operator!=(Fecha f1, Fecha f2) {
 
 //metodos privados de Fecha
 void Fecha::sumar_anios(int anios){
-  if(esBisiesto(_anio) and not esBisiesto(_anio+=anios) 
-    and _mes==FEBRERO and _dia==29){
-    _anio+=anios;
-    _mes=MARZO;
-    _dia=1;
-  }
-  else{
-    _anio+=anios;
-  }
+_anio+=anios;
 }
 
 void Fecha::sumar_meses(int meses){
-  _mes+=meses;
+  _anio+=((_mes + meses ) / 12);
+  _mes=(_mes + meses ) % 12;
 }
 void Fecha::sumar_dias(int dias){
-  _dia+=dias;
+  _anio+=(_dia + dias) /365;
+  _mes=(_mes + ((_dia + dias) % 365) / 30) % 12;
+  _dia=((_dia + dias) % 365) % 30;  // considerar la cantidad de dias de cada mes
 }
 
 // Ejercicio 6: clase período
@@ -204,9 +199,9 @@ int Periodo::dias() const{
 }
 
 void Fecha::sumar_periodo(Periodo p){
-  _anio+=p.anios();
-  _mes+=p.meses();
-  _dia+=p.dias();
+  this->sumar_anios(p.anios());
+  this->sumar_meses(p.meses());
+  this->sumar_dias(p.dias());
 }
 
 // Ejercicio 8: clase Intervalo
@@ -231,5 +226,11 @@ Fecha Intervalo::hasta() const{
   return _hasta;
 }
 int Intervalo::enDias() const{
-  return 2;
+  Fecha f1(_desde);
+  int cantidad=0;
+  while(not (f1==_hasta)){
+    f1.sumar_periodo(Periodo(0,0,1));
+    cantidad++;
+  } 
+  return cantidad;
 }
