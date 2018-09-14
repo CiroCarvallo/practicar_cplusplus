@@ -3,5 +3,5 @@
 ##ejercicios para practicar c++
 
 -`classes`
--`proprocesamiento`
+-`preprocesamiento`
 -`templates`
