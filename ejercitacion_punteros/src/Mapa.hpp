@@ -74,7 +74,7 @@ Mapa<T>::Mapa(int ancho, int alto):
 _ancho(ancho),_alto(alto){
 	_grilla=new T*[ancho];
 	for (int i=0;i<ancho;i++){
-		_grilla[i]=new T[alto];
+		_grilla[i]=new T[alto]();
 	}
 	_cursor=new int [2];
 	_cursor[0]=0,_cursor[1]=0;
@@ -97,25 +97,69 @@ T& Mapa<T>::valor() {
 
 template <class T>
 void Mapa<T>::mover(Direccion direccion) {
-	if (direccion==ESTE) _cursor[0]=(_cursor[0]+1)/_ancho;
-	if (direccion==NORTE) _cursor[1]=(_cursor[1]+1)/_alto;
-	if (direccion==SUR) _cursor[1]=(_cursor[1]-1)/_alto;
-	if (direccion==OESTE) _cursor[0]=(_cursor[0]-1)/_ancho;
+	if (direccion==ESTE) _cursor[0]=(_cursor[0]+1) % _ancho;
+	if (direccion==NORTE) _cursor[1]=(_cursor[1]+1) % _alto;
+	if (direccion==SUR) _cursor[1]=(_cursor[1]-1 + _alto) % _alto;
+	if (direccion==OESTE) _cursor[0]=(_cursor[0]-1+_ancho) % _ancho;
 }
 
 template <class T>
 Mapa<T>::Mapa(const Mapa<T>& otro) {
-	// COMPLETAR
+	_ancho=otro.ancho();
+	_alto=otro.alto();
+	_cursor=otro.valor()
 }
 
 template <class T>
 Mapa<T>::~Mapa() {
-	// COMPLETAR
+	for (int i=0;i<_ancho;i++){
+		delete[] _grilla[i];
+	}
+	delete[] _grilla;
+	delete[] _cursor;
 }
 
 template <class T>
 Mapa<T>& Mapa<T>::operator=(const Mapa<T>& otro) {
-	// COMPLETAR
+	_ancho=otro.ancho();
+	_alto=otro.alto();
+
 }
+/*
+template <class T>
+T& Mapa<T>::valor() {
+	return _cursor;
+}
+
+template <class T>
+void Mapa<T>::mover(Direccion direccion) {
+	if (direccion==ESTE) _cursor=_grilla
+	if (direccion==NORTE) _cursor++; 
+	if (direccion==SUR) _cursor--;
+	if (direccion==OESTE)
+}
+
+template <class T>
+Mapa<T>::Mapa(const Mapa<T>& otro) {
+	_ancho=otro.ancho();
+	_alto=otro.alto();
+	_cursor=otro.valor()
+}
+
+template <class T>
+Mapa<T>::~Mapa() {
+	for (int i=0;i<_ancho;i++){
+		delete[] _grilla[i];
+	}
+	delete[] _grilla;
+	delete[] _cursor;
+}
+
+template <class T>
+Mapa<T>& Mapa<T>::operator=(const Mapa<T>& otro) {
+	_ancho=otro.ancho();
+	_alto=otro.alto();
+
+}*/
 
 #endif
